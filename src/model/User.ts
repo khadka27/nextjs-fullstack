@@ -43,7 +43,7 @@ const userSchema: Schema<User> = new Schema({
     required: [true, "Email is required"],
     unique: true,
     match: [
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,//email regex
       "Invalid email",
     ],
   },
@@ -79,6 +79,6 @@ const userSchema: Schema<User> = new Schema({
 
 const userModel =
   (mongoose.models.Users as mongoose.Model<User>) ||
-  mongoose.model<User>("Users", userSchema);
+  mongoose.model<User>("Users", userSchema);//create user model
 
 export default userModel;
