@@ -1,11 +1,10 @@
-'use client';
-
+"use client";
+import { MessageCard } from '@/components/MassageCard';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
 import { Message } from '@/model/User';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { Loader2, RefreshCcw } from 'lucide-react';
@@ -15,7 +14,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { acceptMessageSchema } from '@/schemas/acceptMessageSchema';
 import { ApiResponse } from '../../../../types/apiResponse';
-import { MessageCard } from '@/components/MassageCard';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -47,8 +45,7 @@ function UserDashboard() {
       toast({
         title: 'Error',
         description:
-          axiosError.response?.data.message ??
-          'Failed to fetch message settings',
+          axiosError.response?.data.message ?? 'Failed to fetch message settings',
         variant: 'destructive',
       });
     } finally {
@@ -110,8 +107,7 @@ function UserDashboard() {
       toast({
         title: 'Error',
         description:
-          axiosError.response?.data.message ??
-          'Failed to update message settings',
+          axiosError.response?.data.message ?? 'Failed to update message settings',
         variant: 'destructive',
       });
     }
@@ -180,9 +176,9 @@ function UserDashboard() {
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
+          messages.map((message) => (
             <MessageCard
-              key={message._id as React.Key }
+              key={message._id as string} // Ensure _id is a string
               message={message}
               onMessageDelete={handleDeleteMessage}
             />
